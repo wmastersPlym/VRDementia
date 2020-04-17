@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class InteractCamera : MonoBehaviour
 {
 
-    public OnInteractEvent testEvent;
+    
 
     public Camera cam;
 
