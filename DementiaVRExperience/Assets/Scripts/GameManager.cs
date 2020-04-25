@@ -1,20 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
-{
+{ // may rename this scrpt if needed
     int currentTurn = 1; // O = 1 and X = 2
     Vector3 pos;
 
     int[] cubes = new int[9];
 
+    public Image winUI;
+    public TextMeshProUGUI winText;
+    
+
+    private void Start()
+    {
+        // anyone think of a cleaner way to do this
+        winUI.enabled = false;
+        winText.enabled = false;
+    }
 
     public void CubePressed(GameObject cube)
     {
-        Debug.Log("Game manager script says hi");
-
-
         int cubeNumber = cube.GetComponent<CubePressed>().cubeNumber;
         pos = new Vector3(0, 0, 1);
 
@@ -49,44 +58,75 @@ public class GameManager : MonoBehaviour
             {
                 DisableCubes();
                 print(player + " wins");
+                winUI.enabled = true; 
+                winText.enabled = true;
+
+                winText.SetText(player + " wins");
             }
             else if (cubes[3] == player && cubes[4] == player && cubes[5] == player) // middle row
             {
                 DisableCubes();
                 print(player + " wins");
+                winUI.enabled = true;
+                winText.enabled = true;
+
+                winText.SetText(player + " wins");
             }
             else if (cubes[6] == player && cubes[7] == player && cubes[8] == player) // bottom row
             {
                 DisableCubes();
                 print(player + " wins");
+                winUI.enabled = true;
+                winText.enabled = true;
+
+                winText.SetText(player + " wins");
             }
             else if (cubes[0] == player && cubes[3] == player && cubes[6] == player) // left col
             {
                 DisableCubes();
                 print(player + " wins");
+                winUI.enabled = true;
+                winText.enabled = true;
+
+                winText.SetText(player + " wins");
             }
             else if (cubes[1] == player && cubes[4] == player && cubes[7] == player)  // middle col
             {
                 DisableCubes();
                 print(player + " wins");
+                winUI.enabled = true;
+                winText.enabled = true;
+
+                winText.SetText(player + " wins");
             }
             else if (cubes[2] == player && cubes[5] == player && cubes[8] == player) // right col
             {
                 DisableCubes();
                 print(player + " wins");
+                winUI.enabled = true;
+                winText.enabled = true;
+
+                winText.SetText(player + " wins");
             }
             else if (cubes[0] == player && cubes[4] == player && cubes[8] == player) // left diagonal
             {
                 DisableCubes();
                 print(player + " wins");
+                winUI.enabled = true;
+                winText.enabled = true;
+
+                winText.SetText(player + " wins");
             }
             else if (cubes[2] == player && cubes[4] == player && cubes[6] == player) // right diagonal
             {
                 DisableCubes();
                 print(player + " wins");
+                winUI.enabled = true;
+                winText.enabled = true;
+
+                winText.SetText(player + " wins");
             }
         }
-
     }
 
     void DisableCubes()
@@ -106,7 +146,6 @@ public class GameManager : MonoBehaviour
         {
             currentTurn = 1; // loop back around
         }
-
     }
 
 
