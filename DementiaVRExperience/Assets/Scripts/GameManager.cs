@@ -11,15 +11,19 @@ public class GameManager : MonoBehaviour
 
     int[] cubes = new int[9];
 
+    public GameObject[] refCubeObjects; // a reference to all the cubes to reset there rotations on reset button pressed
+
     public Image winUI;
     public TextMeshProUGUI winText;
-    
+    public GameObject resetButton;
 
     private void Start()
     {
         // anyone think of a cleaner way to do this
         winUI.enabled = false;
         winText.enabled = false;
+        //resetButton.enabled = false;
+        resetButton.SetActive(false);
     }
 
     public void CubePressed(GameObject cube)
@@ -58,8 +62,9 @@ public class GameManager : MonoBehaviour
             {
                 DisableCubes();
                 print(player + " wins");
-                winUI.enabled = true; 
+                winUI.enabled = true;
                 winText.enabled = true;
+                resetButton.SetActive(true);
 
                 winText.SetText(player + " wins");
             }
@@ -69,6 +74,7 @@ public class GameManager : MonoBehaviour
                 print(player + " wins");
                 winUI.enabled = true;
                 winText.enabled = true;
+                resetButton.SetActive(true);
 
                 winText.SetText(player + " wins");
             }
@@ -78,6 +84,7 @@ public class GameManager : MonoBehaviour
                 print(player + " wins");
                 winUI.enabled = true;
                 winText.enabled = true;
+                resetButton.SetActive(true);
 
                 winText.SetText(player + " wins");
             }
@@ -87,6 +94,7 @@ public class GameManager : MonoBehaviour
                 print(player + " wins");
                 winUI.enabled = true;
                 winText.enabled = true;
+                resetButton.SetActive(true);
 
                 winText.SetText(player + " wins");
             }
@@ -96,6 +104,7 @@ public class GameManager : MonoBehaviour
                 print(player + " wins");
                 winUI.enabled = true;
                 winText.enabled = true;
+                resetButton.SetActive(true);
 
                 winText.SetText(player + " wins");
             }
@@ -105,6 +114,7 @@ public class GameManager : MonoBehaviour
                 print(player + " wins");
                 winUI.enabled = true;
                 winText.enabled = true;
+                resetButton.SetActive(true);
 
                 winText.SetText(player + " wins");
             }
@@ -114,6 +124,7 @@ public class GameManager : MonoBehaviour
                 print(player + " wins");
                 winUI.enabled = true;
                 winText.enabled = true;
+                resetButton.SetActive(true);
 
                 winText.SetText(player + " wins");
             }
@@ -123,6 +134,7 @@ public class GameManager : MonoBehaviour
                 print(player + " wins");
                 winUI.enabled = true;
                 winText.enabled = true;
+                resetButton.SetActive(true);
 
                 winText.SetText(player + " wins");
             }
@@ -134,7 +146,31 @@ public class GameManager : MonoBehaviour
         // disallow users from selecting cubes after a win condition
         foreach (CubePressed cube in FindObjectsOfType<CubePressed>())
         {
-            Destroy(cube);
+            cube.enabled = false;
+        }
+    }
+
+    public void ResetPuzzle() // called on ui pressed event
+    {
+        print("Yo resets called");
+        for (int i = 0; i < cubes.Length; i++)
+        {
+            print(cubes[i]);
+            if (cubes[i] == 1) // if the the cubes are assigned to player one
+            {
+                
+                refCubeObjects[i].transform.Rotate(pos, 90f);
+            }
+
+            if (cubes[i] == 2) // if the the cubes are assigned to player two
+            {
+                refCubeObjects[i].transform.Rotate(pos, -90f);
+            }
+
+            winUI.enabled = false;
+            winText.enabled = false;
+            //resetButton.enabled = false;
+            resetButton.SetActive(false);
         }
     }
 
