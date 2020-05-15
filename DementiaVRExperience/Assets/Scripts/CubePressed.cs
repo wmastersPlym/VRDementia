@@ -11,6 +11,7 @@ public class CubePressed : MonoBehaviour
     public void OnSelected() // when this cube is interacted with 
     {
         GameObject.Find("GameManager").SendMessage("CubePressed", gameObject);
-        Destroy(this); // so we can't repeatedly run this script
+
+        this.enabled = false; // so we can't repeatedly run this script
     }
 }

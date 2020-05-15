@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     void RotateCube(GameObject cube)
     {
-        // Rotate the cube based on what turn it is 
+        // Rotate the cube based on who turn it is 
         if (currentTurn == 1)
         {
             cube.transform.Rotate(pos, 90f);
@@ -138,6 +138,10 @@ public class GameManager : MonoBehaviour
 
                 winText.SetText(player + " wins");
             }
+            else
+            {
+                print("tie!");
+            }
         }
     }
 
@@ -149,29 +153,42 @@ public class GameManager : MonoBehaviour
             cube.enabled = false;
         }
     }
+    void EnableCubes()
+    {
+        // allow users from selecting cubes after a reset condition
+        foreach (CubePressed cube in FindObjectsOfType<CubePressed>())
+        {
+            cube.enabled = true;
+        }
+        
+    }
 
     public void ResetPuzzle() // called on ui pressed event
     {
         print("Yo resets called");
         for (int i = 0; i < cubes.Length; i++)
         {
-            print(cubes[i]);
+
             if (cubes[i] == 1) // if the the cubes are assigned to player one
             {
-                
+
                 refCubeObjects[i].transform.Rotate(pos, 90f);
+                cubes[i] = 0; // reset them
             }
 
             if (cubes[i] == 2) // if the the cubes are assigned to player two
             {
                 refCubeObjects[i].transform.Rotate(pos, -90f);
+                cubes[i] = 0; // reset them
             }
 
             winUI.enabled = false;
             winText.enabled = false;
             //resetButton.enabled = false;
             resetButton.SetActive(false);
+
         }
+        EnableCubes();
     }
 
     void NextTurn()
